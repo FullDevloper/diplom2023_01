@@ -13,7 +13,7 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
     resolver: yupResolver(signUpSchema),
   });
