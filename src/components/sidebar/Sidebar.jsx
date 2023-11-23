@@ -3,18 +3,28 @@ import { SidebarHeader } from './header'
 import { Notification } from './notification'
 import {Search} from "./search"
 import { Conversation } from './conversationb'
+import SearchResults from './search/SearchResults'
 export default function Sidebar() {
   const [searchResults,setSearchResults]=useState([])
-  // console.log(searchResults)
+  console.log(searchResults)
   return (
     <div className='w-[40%] h-full select-none'>
       <SidebarHeader/>
       {/*Мэдэгдэл*/}
       <Notification/>
       {/*Хайлт  */}
-      <Search searchLength={searchResults.length}/>
+      <Search setSearchResults={setSearchResults} searchLength={searchResults.length}/>
       {/*Харилцан*/}
-      <Conversation/>
+      {
+        searchResults.length >0 ?(
+          <SearchResults setSearchResults={setSearchResults} searchResults={searchResults} />
+        ):(
+          <>
+          <Conversation/>
+          </>
+        )
+      }
+      
     </div>
   )
 }

@@ -14,7 +14,7 @@ const Home = () => {
   },[user])
   return (
     <div className="h-screen dark:bg-dark_bg_1 flex items-center justify-center overflow-hidden">
-      <div className='container min-h-full w-full flex'><Sidebar/></div>
+      <div className='container h-screen'><Sidebar/></div>
       </div>
   )
 }

@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 // import {  useSelector } from 'react-redux/es/hooks/useSelector'
 import { useDispatch, useSelector } from "react-redux";
+import Menu from './Menu';
 import { ChatIcon, CommunityIcon, DotsIcon, StoryIcon } from "../../../svg";
 export default function SidebarHeader() {
   const {user} =useSelector((state)=>state.user)
@@ -33,10 +34,12 @@ export default function SidebarHeader() {
               className="relative"
               
             >
-              <button className={`btn ${showMenu ? "bg-dark_hover_1" : ""}`}>
+              <button onClick={()=>setShowMenu((prev)=>!prev)} className={`btn ${showMenu ? "bg-dark_hover_1":""}`}>
                 <DotsIcon className="dark:fill-dark_svg_1" />
               </button>
-              
+              {
+                showMenu ? <Menu/> : null
+              }
             </li>
           </ul>
       </div>

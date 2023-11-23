@@ -90,7 +90,7 @@ export const registerUser = createAsyncThunk(
               });
               return data;
             } catch (error) {
-              console.log(error,"sss")
+         
       return rejectWithValue(error.response.data);
     }
   }

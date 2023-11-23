@@ -6,8 +6,8 @@ const Conversation = () => {
   return (
     <div className='convos scrollbar'>
 
-        {conversations && conversations.map((convo)=>(
-<Coversationm convo={convo} key={convo._id}/>
+        {conversations && conversations.map((convo,index)=>(
+<Coversationm convo={convo} index={index+1} key={convo._id}/>
         )) } 
     </div>
   )
