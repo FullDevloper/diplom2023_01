@@ -1,9 +1,22 @@
 import React from 'react'
-
+import {useDispatch,useSelector} from "react-redux"
+import {open_create_conversation} from "../../../features/chatSlice"
 const Contact = ({contact,index,setSearchResults}) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const { token } = user;
+  const values = {
+    receiver_id: contact._id,
+    token,
+  };
+  const openConversation = async () => {
+    let newConvo = await dispatch(open_create_conversation(values));
+    
+    // socket.emit("join conversation", newConvo.payload._id);
+  };
   return (
     <li
-  
+  onClick={()=>openConversation()}
     className="list-none h-[72px] hover:dark:bg-dark_bg_2 cursor-pointer dark:text-dark_text_1 px-[10px]"
   >
     {/*Container*/}
@@ -17,6 +30,7 @@ const Contact = ({contact,index,setSearchResults}) => {
             alt={contact.name}
             className="w-full h-full object-cover "
           />
+          
         </div>
         {/*Conversation name and message*/}
         <div className="w-full flex flex-col">

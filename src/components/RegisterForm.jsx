@@ -9,7 +9,7 @@ import { changeStatus, registerUser } from "../features/userSlice";
 import { useState } from "react";
 import Picture from "./auth/Picture";
 import axios from "axios";
-const cloud_name = process.env.React_App_cloud_name;
+// const cloud_name = process.env.React_App_cloud_name;
 const cloud_secret = process.env.React_App_cloud_name_secret;
 export default function RegisterForm() {
   const dispatch = useDispatch();
