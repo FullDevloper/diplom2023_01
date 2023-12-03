@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AttachmentIcon } from "../../../svg";
-const Attachments = ({showAttachments}) => {
+import Menu from './Menu';
+const Attachments = ({showAttachments,setShowAttachments,setShowPicker}) => {
+  // const [show,setShow]=useState(false)
   return (
     <li className="relative">
       <button
-        // onClick={() => {
-        //   setShowPicker(false);
-        //   setShowAttachments((prev) => !prev);
-        // }}
+        onClick={() => {
+          setShowPicker(false);
+          setShowAttachments((prev) => !prev);
+        }}
         type="button"
         className="btn"
       >
         <AttachmentIcon className="dark:fill-dark_svg_1" />
       </button>
       {/*Menu*/}
-      {/* {showAttachments ? <Menu /> : null} */}
+      {showAttachments ? <Menu /> : null}
     </li>
   )
 }

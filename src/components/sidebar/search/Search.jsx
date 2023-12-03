@@ -18,6 +18,7 @@ const {token}=user;
           }
         })
         setSearchResults(data)
+        // setShow(false)
       }catch(error)
       {
         console.log("err",error)
@@ -28,7 +29,7 @@ const {token}=user;
       }
 
     }
-    console.log(searchLength)
+    // console.log(searchLength)
   return (
     <div className="h-[49px] py-1.5">
     {/*Container*/}
@@ -53,7 +54,7 @@ const {token}=user;
             placeholder="Шинэ харилцагч хайх"
             className="input"
             onFocus={() => setShow(true)}
-            onBlur={() => searchLength == 0 && setShow(false)}
+            onBlur={() => searchLength === 0 && setShow(false)}
             onKeyDown={(e) => handleSearch(e)}
           />
         </div>

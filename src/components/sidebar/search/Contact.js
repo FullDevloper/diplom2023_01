@@ -8,9 +8,12 @@ const Contact = ({contact,index,setSearchResults}) => {
   const values = {
     receiver_id: contact._id,
     token,
+    isGroup:false
   };
   const openConversation = async () => {
-    let newConvo = await dispatch(open_create_conversation(values));
+    console.log(values,"aaaasdsadas")
+     await dispatch(open_create_conversation(values));
+     setSearchResults([])
     
     // socket.emit("join conversation", newConvo.payload._id);
   };

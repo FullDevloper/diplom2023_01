@@ -1,9 +1,13 @@
-import React from 'react'
+import React,{useEffect, useRef} from 'react'
 import Message from './Message'
 import {useSelector} from "react-redux"
 const ChatMessages = () => {
   const {messages} =useSelector((state)=>state.chat)
   const {user} =useSelector((state)=>state.user)
+  const endRef=useRef()
+  useEffect(()=>{
+    endRef.current.scrollIntoView({behavior:"smooth"})
+  },[messages])
   return (
     <div className="mb-[60px] bg-[url('https://res.cloudinary.com/dmhcnhtng/image/upload/v1677358270/Untitled-1_copy_rpx8yb.jpg')]
     bg-cover bg-no-repeat
@@ -12,7 +16,7 @@ const ChatMessages = () => {
 
 {messages &&
           messages.map((message) => (
-            <>
+            <div key={message._id}>
               {/*Message files */}
               {/* {message.files.length > 0
                 ? message.files.map((file) => (
@@ -32,8 +36,9 @@ const ChatMessages = () => {
                   me={user._id === message.sender._id}
                 />
               ) : null}
-            </>
+            </div>
           ))}
+          <div className='mt-2' ref={endRef}></div>
 </div>
 
     </div>
