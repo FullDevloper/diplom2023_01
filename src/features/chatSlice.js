@@ -140,7 +140,7 @@ export const chatSlice =createSlice({
             let newConvos = [...state.conversations].filter(
               (c) => c._id !== conversation._id
             );
-            console.log("Newconvos",newConvos)
+            
             newConvos.unshift(conversation);
             state.conversations = newConvos;
             state.files = [];

@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 import Coversationm from './Coversationm'
 const Conversation = () => {
     const {conversations,activeConversation}=useSelector((state)=> state.chat)
-    console.log(activeConversation,"aaa")
+    // console.log(activeConversation,"aaa")
+    console.log("Conversations",conversations)
   return (
     <div className='convos scrollbar'>
 

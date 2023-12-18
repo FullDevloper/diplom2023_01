@@ -3,12 +3,14 @@ import moment from 'moment/moment'
 
 import { dateHandler } from '../../../utils/date'
 import {useDispatch,useSelector} from "react-redux"
-import {getConversationId} from "../../../utils/chat"
+import {getConversationId,getConversationName} from "../../../utils/chat"
+import { capitalize } from '../../../utils/string'
+
 import {open_create_conversation,setActiveConversation} from "../../../features/chatSlice"
 const Coversationm = ({convo,index}) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const { activeConversation } = useSelector((state) => state.chat);
+  // const { activeConversation } = useSelector((state) => state.chat);
   const { token } = user;
   const values = {
     receiver_id: getConversationId(user, convo.users),
@@ -19,11 +21,11 @@ const Coversationm = ({convo,index}) => {
     dispatch(open_create_conversation(values));
     // socket.emit("join conversation", newConvo.payload._id);
   };
-  const setActives =()=>{
-    dispatch(setActiveConversation(convo))
-  }
+  // const setActives =()=>{
+  //   dispatch(setActiveConversation(convo))
+  // }
   // console.log(user._id,"user")
-  // console.log(convo.users)
+  // console.log(user._id)
  
   return (
     <div onClick={openConversation} className='list-none h-[72px] w-full dark:bg-dark_bg_1 hover:dark:bg-dark_bg_2 cursor-pointer dark:text-dark_text_1 px-[10px]'>
@@ -36,8 +38,7 @@ const Coversationm = ({convo,index}) => {
 
             <h1 className="font-bold flex items-center gap-x-2">
 
-              {convo.name}
-            </h1>
+          {  capitalize(getConversationName(user, convo.users))}              </h1>
             <div>
               <div className='flex items-center gap-x-1 dark:text-dark_text_2'>
 
