@@ -3,11 +3,14 @@ import { Sidebar } from '../components/sidebar/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { getConversations } from '../features/chatSlice';
 import { ChatContainer, ChatHome } from '../components/chat';
-const Home = () => {
+import SocketContext from '../context/SocketContext';
+const Home = ({socket}) => {
   const dispatch =useDispatch();
   const {user}=useSelector((state)=>state.user)
   const  {activeConversation}=useSelector((state)=>state.chat)
-  
+  useEffect(()=>{
+    socket.emit("join",user._id)
+  },[user])
   useEffect(()=>{
     if(user?.token)
     {
@@ -28,4 +31,13 @@ const Home = () => {
   )
 }
 
-export default Home
+const HomeWithSocket=(props)=>(
+  <SocketContext.Consumer>
+    {
+    (socket)=><Home {...props} socket={socket}/>
+    }
+
+  </SocketContext.Consumer>
+  
+)
+export default HomeWithSocket;
