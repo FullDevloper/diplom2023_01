@@ -3,11 +3,18 @@ import moment from 'moment/moment'
 
 import { dateHandler } from '../../../utils/date'
 import {useDispatch,useSelector} from "react-redux"
+<<<<<<< HEAD
 import {getConversationId,getConversationName} from "../../../utils/chat"
 import { capitalize } from '../../../utils/string'
 
 import {open_create_conversation,setActiveConversation} from "../../../features/chatSlice"
 const Coversationm = ({convo,index}) => {
+=======
+import {getConversationId} from "../../../utils/chat"
+import {open_create_conversation} from "../../../features/chatSlice"
+import SocketContext from '../../../context/SocketContext'
+const Coversationm = ({convo,index,socket}) => {
+>>>>>>> c7634528a6db4926755fa8ec24bf4c7572041f33
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   // const { activeConversation } = useSelector((state) => state.chat);
@@ -17,9 +24,9 @@ const Coversationm = ({convo,index}) => {
     isGroup: convo.isGroup ? convo._id : false,
     token,
   };
-  const openConversation =  () => {
-    dispatch(open_create_conversation(values));
-    // socket.emit("join conversation", newConvo.payload._id);
+  const openConversation = async () => {
+   await dispatch(open_create_conversation(values));
+    socket.emit("join conversation", activeConversation.existed_conversation._id);
   };
   // const setActives =()=>{
   //   dispatch(setActiveConversation(convo))
@@ -70,5 +77,11 @@ const Coversationm = ({convo,index}) => {
     </div>
   )
 }
-
-export default Coversationm
+const ConversationWithContext=(props)=>(
+  <SocketContext.Consumer>
+    {
+      (socket)=><Coversationm {...props} socket={socket}/>
+    }
+  </SocketContext.Consumer>
+)
+export default ConversationWithContext

@@ -1,12 +1,12 @@
 import React,{useState} from 'react'
 // import {  useSelector } from 'react-redux/es/hooks/useSelector'
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import Menu from './Menu';
 import { ChatIcon, CommunityIcon, DotsIcon, StoryIcon } from "../../../svg";
 export default function SidebarHeader() {
   const {user} =useSelector((state)=>state.user)
   const [showMenu, setShowMenu] = useState(false);
-  const [showCreateGroup, setShowCreateGroup] = useState(false);
+  // const [showCreateGroup, setShowCreateGroup] = useState(false);
     return (
     <div className='h-[50px] dark:bg-dark_bg_2 flex items-center p16'>
       <div className='w-full flex items-center justify-between'>
