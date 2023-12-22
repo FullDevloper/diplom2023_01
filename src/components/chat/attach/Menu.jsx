@@ -2,9 +2,11 @@ import React from 'react'
 import {   CameraIcon,
     ContactIcon,
     // DocumentIcon,
-    DocumentIcon,
+    // DocumentIcon,
     PollIcon,
     StickerIcon, } from '../../../svg'
+import PhotoAttachment from './PhotoAttachment'
+import DocumentAttachment from './Documents'
 const Menu = () => {
   return (
     <ul className='cursor-pointer absolute bottom-14 openEmojiAnimation'>
@@ -20,7 +22,7 @@ const Menu = () => {
           <ContactIcon />
         </button>
       </li>
-      <DocumentIcon />
+      <DocumentAttachment />
       <li>
         <button type="button" className="bg-[#D3396D] rounded-full">
           <CameraIcon />
@@ -30,6 +32,7 @@ const Menu = () => {
         <button type="button" className="rounded-full">
           <StickerIcon />
         </button>
+        <PhotoAttachment/>
       </li>
     </ul>
   )

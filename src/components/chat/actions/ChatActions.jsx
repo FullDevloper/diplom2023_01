@@ -6,7 +6,8 @@ import { SendIcon } from "../../../svg";
 import { ClipLoader } from "react-spinners";
 import Input from './Input';
 import { sendMessage } from '../../../features/chatSlice';
-const ChatActions = () => {
+import SocketContext from '../../../context/SocketContext';
+const ChatActions = ({socket}) => {
     const dispatch = useDispatch();
     const [showPicker, setShowPicker] = useState(false);
     const textRef = useRef();
@@ -25,8 +26,10 @@ const ChatActions = () => {
     const SendMessageHandler=async(e)=>{
       e.preventDefault()
       setLoading(true)
-      await dispatch(sendMessage(values));
-// console.log(showAttachments)
+   let newMSG=   await dispatch(sendMessage(values));
+   console.log(newMSG,"ss")
+   socket.emit("send message",newMSG.payload)
+
       setMessage("")
       setLoading(false)
     }
@@ -60,4 +63,9 @@ const ChatActions = () => {
   )
 }
 
-export default ChatActions
+const ChatActionsWithSocket=(props)=>(
+  <SocketContext.Consumer>
+    {(socket)=><ChatActions {...props} socket={socket}/>}
+  </SocketContext.Consumer>
+)
+export default ChatActionsWithSocket

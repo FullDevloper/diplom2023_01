@@ -92,7 +92,31 @@ export const chatSlice =createSlice({
     reducers:{
       setActiveConversation:(state,action)=>{
       state.activeConversation=action.payload
-    }},
+    }
+  ,
+  
+    updateMessagesAndConversations: (state, action) => {
+      //update messages
+      let convo = state.activeConversation;
+      // console.log(action.payload,"Update")
+      if (convo._id === action.payload.conversation._id) {
+        state.messages = [...state.messages, action.payload];
+      }
+      //update conversations
+      let conversation = {
+        ...action.payload.conversation,
+        latestMessage: action.payload,
+      };
+      let newConvos = [...state.conversations].filter(
+        (c) => c._id !== conversation._id
+      );
+      newConvos.unshift(conversation);
+      state.conversations = newConvos;
+    },
+    addFiles: (state, action) => {
+      state.files = [...state.files, action.payload];
+    },
+  },
     extraReducers(builder) {
         builder
           .addCase(getConversations.pending, (state, action) => {
@@ -112,6 +136,7 @@ export const chatSlice =createSlice({
           .addCase(open_create_conversation.fulfilled, (state, action) => {
             state.status = "succeeded";
             state.activeConversation = action.payload;
+            state.files = [];
           })
           .addCase(open_create_conversation.rejected, (state, action) => {
             state.status = "failed";
@@ -153,5 +178,5 @@ export const chatSlice =createSlice({
         }
 })
 
-export const {setActiveConversation}=chatSlice.actions;
+export const {setActiveConversation,updateMessagesAndConversations,addFiles}=chatSlice.actions;
 export default chatSlice.reducer

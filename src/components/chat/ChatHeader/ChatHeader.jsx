@@ -1,6 +1,7 @@
 import React from 'react'
 import {useSelector} from "react-redux"
 import {capitalize} from "../../../utils/string"
+import SocketContext from '../../../context/SocketContext';
 import { getConversationName } from '../../../utils/chat';
 import {
     CallIcon,
@@ -8,10 +9,10 @@ import {
     SearchLargeIcon,
     
   } from "../../../svg";
-const ChatHeader = () => {
+const ChatHeader = ({online}) => {
     const {activeConversation} =useSelector((state)=>state.chat)
     const { user } = useSelector((state) => state.user);
-    console.log("object",activeConversation)
+    // console.log("object",activeConversation)
   return (
     <div className="h-[59px] dark:bg-dark_bg_2 flex items-center p16 select-none">
     {/*Container*/}
@@ -33,7 +34,7 @@ const ChatHeader = () => {
            {capitalize(getConversationName(user,activeConversation.existed_conversation.users))}
           </h1>
           <span className="text-xs dark:text-dark_svg_2">
-               online
+          {online ? "идэвхтэй" : "идэвхгүй"}
             </span>
         </div>
       </div>
@@ -67,4 +68,9 @@ const ChatHeader = () => {
   )
 }
 
-export default ChatHeader
+const ChatHeaderWithSocket = (props) => (
+  <SocketContext.Consumer>
+    {(socket) => <ChatHeader {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+export default ChatHeaderWithSocket;

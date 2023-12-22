@@ -4,7 +4,7 @@ import { Notification } from './notification'
 import {Search} from "./search"
 import { Conversation } from './conversationb'
 import SearchResults from './search/SearchResults'
-export default function Sidebar() {
+export default function Sidebar({onlineUsers,typing}) {
   const [searchResults,setSearchResults]=useState([])
   console.log(searchResults)
   return (
@@ -20,7 +20,7 @@ export default function Sidebar() {
           <SearchResults setSearchResults={setSearchResults} searchResults={searchResults} />
         ):(
           <>
-          <Conversation/>
+          <Conversation onlineUsers={onlineUsers} typing={typing}/>
           </>
         )
       }
